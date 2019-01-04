@@ -15,9 +15,10 @@ __name__ = "Microbe-Log"
 import os
 import wikipedia
 import sqlite3
+import time
 
-print("Running database checks")
-
+print("Updating database...")
+start = time.time()
 conn = sqlite3.connect('bob_bacteria.db')
 
 cur = conn.cursor()
@@ -44,7 +45,7 @@ class virus:
             cur.execute("INSERT into bob VALUES (?, ?, ?, null)", (self.namev, self.typev, self.speciesv))
             conn.commit()
         else:
-            print("Bob already in the database. Skipping...")
+            pass
 
     def __str__(self):
         return (" ".join(["Name:", self.namev, "Type:", self.typev, "Species:", self.speciesv, "Common disease name:", self.common_name_diseasev, "Group:", self.groupv]))
@@ -69,7 +70,7 @@ class fungi:
             cur.execute("INSERT into bob VALUES (?, ?, ?, null)", (self.namef, self.typef, self.speciesf))
             conn.commit()
         else:
-            print("Bob already in the database. Skipping...")
+            pass
 
     def __str__(self):
         return(" ".join(["Name:", self.namef, "Type:", self.typef, "Species:", self.speciesf]))
@@ -100,7 +101,7 @@ class protozoa:
             cur.execute("INSERT into bob VALUES (?, ?, ?, null)", (self.namep, self.typep, self.speciesp))
             conn.commit()
         else:
-            print("Bob already in the database. Skipping...")
+            pass
 
     def __str__(self):
         return (" ".join(["Name:", self.namep, "Type:", self.typep, "Species:", self.speciesp, "Common disease name:", self.common_name_diseasep]))
@@ -128,7 +129,7 @@ class bacteria:
             cur.execute("INSERT into bob VALUES (?, ?, ?, null)", (self.nameb, self.typeb, self.speciesb))
             conn.commit()
         else:
-            print("Bob already in the database. Skipping...")
+            pass
 
     def __str__(self):
         return (" ".join(["Name:", self.nameb, "Type:", self.typeb, "Species:", self.speciesb, "Common disease name:", self.common_name_diseaseb]))
@@ -164,6 +165,11 @@ bac00011010 = bacteria("Clostridium Perfringens", "Gram Positive", "Perfringens"
 bac00011100 = bacteria("Methicillin Resistant Staphylococcus Areus", "Gram Positive", "Areus", "Lorem ipsum") # 28
 # Gram Positive Bacteria || EVEN NUMBERS
 
+end = time.time()
+print("")
+print("Updating and verifying database took\n"
+      "---{0:.3f} Seconds---".format(end - start))
+time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
 try:
     def bug():
